@@ -18,6 +18,7 @@ namespace BoomiSharp
             {
                 return $"{typeof(T).Name}/query/async";
             }
+
             return $"{typeof(T).Name}/query";
         }
 
@@ -25,12 +26,16 @@ namespace BoomiSharp
             where T : IBoomiObject
         {
             return $"{typeof(T).Name}/queryMore";
-
         }
 
         public static string GetObjectUrl<T>(string id)
             where T : IBoomiObject
         {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentException("Id cannot be null, blank, or white space.", nameof(id));
+            }
+
             return $"{typeof(T).Name}/{id}";
         }
 
@@ -49,6 +54,11 @@ namespace BoomiSharp
         public static string GetUpdateUrl<T>(string id)
             where T : IBoomiObject
         {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentException("Id cannot be null, blank, or white space.", nameof(id));
+            }
+
             return $"{typeof(T).Name}/{id}/update";
         }
 
@@ -58,8 +68,14 @@ namespace BoomiSharp
             return BoomiObjectUrlMapper.GetUpdateUrl<T>(id.ToString());
         }
 
-        internal static string GetDeleteUrl<T>(string id) where T : IBoomiObject
+        internal static string GetDeleteUrl<T>(string id) 
+            where T : IBoomiObject
         {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentException("Id cannot be null, blank, or white space.", nameof(id));
+            }
+
             return $"{typeof(T).Name}/{id}";
         }
     }
