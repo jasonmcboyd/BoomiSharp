@@ -17,17 +17,18 @@ namespace BoomiSharp.Http
             ContractResolver = new CamelCasePropertyNamesContractResolver(),
             Converters = new List<JsonConverter>()
                 {
-                    new QueryRequestJsonConverter(),
-                    new QueryOperatorJsonConverter(),
-                    new EnvironmentClassificationJsonConverter(),
-                    new ComponentTypeJsonConverter(),
+                    new AccountStatusJsonConverter(),
                     new AtomStatusJsonConverter(),
                     new AtomTypeJsonConverter(),
-                    new AccountStatusJsonConverter(),
+                    new ComponentTypeJsonConverter(),
+                    new EnvironmentClassificationJsonConverter(),
                     new LogicalOperatorJsonConverter(),
-                    new SimpleExpressionJsonConverter(),
+                    new ProcessExecutionJsonConverter(),
                     new ProcessSchedulesJsonConverter(),
-                    new RetrySchedulesJsonConverter()
+                    new QueryOperatorJsonConverter(),
+                    new QueryRequestJsonConverter(),
+                    new RetrySchedulesJsonConverter(),
+                    new SimpleExpressionJsonConverter()
                 }
         };
         
@@ -37,7 +38,11 @@ namespace BoomiSharp.Http
             return JsonConvert.DeserializeObject<T>(result, HttpClientExtensions._Settings);
         }
 
-        public async static Task<TResult> PostAsync<TBody, TResult>(this HttpClient httpClient, string requestUri, TBody body, bool serializeBody = true)
+        public async static Task<TResult> PostAsync<TBody, TResult>(
+            this HttpClient httpClient, 
+            string requestUri, 
+            TBody body, 
+            bool serializeBody = true)
         {
             string json = null;
             if (serializeBody)
@@ -54,7 +59,27 @@ namespace BoomiSharp.Http
             var responseContent = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<TResult>(responseContent, HttpClientExtensions._Settings);
         }
-        
+
+        public static Task PostAsync<TBody>(
+            this HttpClient httpClient, 
+            string requestUri, 
+            TBody body, 
+            bool serializeBody = true)
+        {
+            string json = null;
+            if (serializeBody)
+            {
+                json = JsonConvert.SerializeObject(body, HttpClientExtensions._Settings);
+            }
+            else
+            {
+                json = body.ToString();
+            }
+            var content = new StringContent(json);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            return httpClient.PostAsync(requestUri, content);
+        }
+
         public async static Task<DeleteResult> DeleteWithResultAsync(this HttpClient httpClient, string requestUri)
         {
             var response = await httpClient.DeleteAsync(requestUri);
