@@ -13,11 +13,11 @@ namespace BoomiSharp.Dtos.BoomiObjects
         {
             this.ProcessId = processId;
             this.AtomId = AtomId;
-            if (ProcessProperties != null)
+            if (processProperties != null)
             {
                 this.ProcessProperties =
                     processProperties
-                    .Select(x => new ProcessExecution.ProcessProperty
+                    .Select(x => new Property
                     {
                         Name = x.Name,
                         Value = x.Value
@@ -28,12 +28,6 @@ namespace BoomiSharp.Dtos.BoomiObjects
 
         public Guid ProcessId { get; set; }
         public Guid AtomId { get; set; }
-        public ProcessProperty[] ProcessProperties { get; set; }
-
-        public class ProcessProperty
-        {
-            public string Name { get; set; }
-            public string Value { get; set; }
-        }
+        public Property[] ProcessProperties { get; set; }
     }
 }
