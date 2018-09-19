@@ -1,9 +1,9 @@
 ﻿using BoomiSharp.Dtos.Expressions;
-using BoomiSharp.Extensions;
+using BoomiSharp.Dtos.Extensions;
 using Newtonsoft.Json;
 using System;
 
-namespace BoomiSharp.Json
+namespace BoomiSharp.Dtos.Serialization
 {
     public class SimpleExpressionJsonConverter : JsonConverter
     {

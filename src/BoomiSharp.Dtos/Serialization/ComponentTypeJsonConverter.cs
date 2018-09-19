@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System;
 
-namespace BoomiSharp.Json
+namespace BoomiSharp.Dtos.Serialization
 {
     internal class ComponentTypeJsonConverter : JsonConverter<ComponentType>
     {

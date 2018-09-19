@@ -1,10 +1,10 @@
 ﻿using BoomiSharp.Dtos.Expressions;
-using BoomiSharp.Extensions;
+using BoomiSharp.Dtos.Extensions;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
 
-namespace BoomiSharp.Json
+namespace BoomiSharp.Dtos.Serialization
 {
     public class QueryOperatorJsonConverter : JsonConverter<QueryOperator>
     {

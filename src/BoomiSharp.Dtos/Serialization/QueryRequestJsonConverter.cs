@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System;
 
-namespace BoomiSharp.Json
+namespace BoomiSharp.Dtos.Serialization
 {
     public class QueryRequestJsonConverter : JsonConverter<QueryRequest>
     {

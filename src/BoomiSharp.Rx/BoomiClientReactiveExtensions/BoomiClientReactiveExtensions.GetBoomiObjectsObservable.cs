@@ -24,35 +24,49 @@ namespace BoomiSharp.Rx
         private static IObservable<T[]> GetBoomiObjectsObservable_Internal<T>(BoomiClient client, Task<QueryResult<T>> initialRequest)
             where T : IBoomiObject, ICanQuery
         {
-            return
-                Observable
-                .Create<T[]>(
-                    async (obs, token) =>
-                    {
-                        //var result = await initialRequest;
-                        
-                        
+            throw new NotImplementedException();
+            // TODO:
+            //return
+            //    Observable
+            //    .Create<T[]>(
+            //        async (obs, token) =>
+            //        {
+            //            var task = initialRequest;
+            //            QueryResult<T> result = null;
 
-                        QueryResult<T> result = null;
+            //            try
+            //            {
+            //                do
+            //                {
+            //                    response = await task;
+            //                    response.EnsureSuccessStatusCode();
+            //                    token.ThrowIfCancellationRequested();
+            //                    result = await response.DeserializeContentAsync();
+            //                    response.Dispose();
+            //                    token.ThrowIfCancellationRequested();
+            //                    obs.OnNext(result);
+            //                    task = client.GetBoomiObjectsAsync<T>(result.QueryToken);
+            //                }
+            //                while (!string.IsNullOrEmpty(result.QueryToken));
 
-                        do
-                        {
-                            result = await initialRequest;
-                            if (token.IsCancellationRequested)
-                            {
-                                throw new OperationCanceledException();
-                            }
-                            obs.OnNext(result.Result);
-                            //while (!string.IsNullOrEmpty(result.QueryToken))
-                            //{
-                            //    result = await client.GetBoomiObjectsAsync<T>(result.QueryToken);
-                            //    obs.OnNext(result.Result);
-                            //}
-                        }
-                        while (!string.IsNullOrEmpty(result.QueryToken));
-
-                        obs.OnCompleted();
-                    });
+            //                obs.OnCompleted();
+            //            }
+            //            catch (OperationCanceledException e)
+            //            {
+            //                obs.OnCompleted();
+            //            }
+            //            catch (Exception e)
+            //            {
+            //                obs.OnError(e);
+            //            }
+            //            finally
+            //            {
+            //                if (response != null)
+            //                {
+            //                    response.Dispose();
+            //                }
+            //            }
+            //        });
         }
     }
 }

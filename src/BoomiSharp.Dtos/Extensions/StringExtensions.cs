@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace BoomiSharp.Extensions
+namespace BoomiSharp.Dtos.Extensions
 {
     internal static class StringExtensions
     {

@@ -62,10 +62,9 @@ namespace BoomiSharp
             var response =
                 this
                 ._Client
-                .PostAsync<string, QueryResult<T>>(
+                .PostJsonAsync<QueryResult<T>>(
                     BoomiObjectUrlMapper.GetQueryMoreUrl<T>(),
-                    queryToken,
-                    false);
+                    queryToken);
 
             return response;
         }
