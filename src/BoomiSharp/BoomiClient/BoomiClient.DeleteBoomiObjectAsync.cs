@@ -20,7 +20,7 @@ namespace BoomiSharp
         public Task<DeleteResult> DeleteBoomiObjectAsync<T>(string id)
             where T : IBoomiObject, ICanDelete
         {
-            return this._Client.DeleteWithResultAsync(BoomiObjectUrlMapper.GetDeleteUrl<T>(id));
+            return this.GetClient().DeleteWithResultAsync(BoomiObjectUrlMapper.GetDeleteUrl<T>(id));
         }
     }
 }

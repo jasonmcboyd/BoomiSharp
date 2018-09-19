@@ -11,7 +11,7 @@ namespace BoomiSharp
         {
             var result =
                 this
-                ._Client
+                .GetClient()
                 .PostAsync<T, T>(
                     BoomiObjectUrlMapper.GetObjectUrl<T>(),
                     boomiObject);

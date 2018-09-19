@@ -18,7 +18,7 @@ namespace BoomiSharp
                 ids
                 .Buffer(100)
                 .Select(x => new BulkRequest(x))
-                .Select(x => this._Client.PostAsync<BulkRequest, BulkResult<T>>(BoomiObjectUrlMapper.GetBulkUrl<T>(), x));
+                .Select(x => this.GetClient().PostAsync<BulkRequest, BulkResult<T>>(BoomiObjectUrlMapper.GetBulkUrl<T>(), x));
 
             var result = await Task.WhenAll(tasks);
 
@@ -36,7 +36,7 @@ namespace BoomiSharp
         {
             var response =
                 this
-                ._Client.PostAsync<QueryRequest, QueryResult<T>>(
+                .GetClient().PostAsync<QueryRequest, QueryResult<T>>(
                     BoomiObjectUrlMapper.GetQueryUrl<T>(),
                     new QueryRequest());
 
@@ -48,7 +48,7 @@ namespace BoomiSharp
         {
             var response =
                 this
-                ._Client
+                .GetClient()
                 .PostAsync<QueryRequest, QueryResult<T>>(
                     BoomiObjectUrlMapper.GetQueryUrl<T>(),
                     new QueryRequest(expression));
@@ -61,7 +61,7 @@ namespace BoomiSharp
         {
             var response =
                 this
-                ._Client
+                .GetClient()
                 .PostJsonAsync<QueryResult<T>>(
                     BoomiObjectUrlMapper.GetQueryMoreUrl<T>(),
                     queryToken);

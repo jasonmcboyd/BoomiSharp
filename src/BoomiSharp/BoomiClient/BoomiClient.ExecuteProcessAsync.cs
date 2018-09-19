@@ -10,7 +10,7 @@ namespace BoomiSharp
         {
             return
                 this
-                ._Client
+                .GetClient()
                 .PostAsync<ProcessExecution>(
                     "executeProcess",
                     request);
